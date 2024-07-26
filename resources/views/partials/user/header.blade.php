@@ -1,8 +1,8 @@
 <nav class="bg-gray-100 rounded-lg border-gray-200 dark:bg-gray-900 relative z-10">
-    <div class="container mx-auto flex flex-wrap items-center justify-between p-4 space-x-4">
+    <div class="container mx-auto flex items-center justify-between p-4 space-x-4">
         <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 md:h-8" alt="Flowbite Logo" />
-            <span class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white">News Talenthub</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Boise_State_Athletic_%22B%22.png" class="h-6 md:h-8" alt="Flowbite Logo" />
+            <span class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-gray-200">Berita.HU</span>
         </a>
         <div class="flex items-center space-x-4 md:order-2">
             <button type="button" aria-controls="search-bar" aria-expanded="false" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 md:hidden" id="search-toggle">
@@ -18,7 +18,14 @@
                     </svg>
                     <span class="sr-only">Search icon</span>
                 </div>
-                <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
+
+                <form action="{{ route('search') }}" method="GET">
+                    <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="query" placeholder="Search news title...">
+                </form>
+
+
+                {{-- <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."> --}}
+
             </div>
             <a href="{{ route('login') }}" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

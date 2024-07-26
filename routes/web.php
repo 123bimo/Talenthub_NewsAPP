@@ -15,6 +15,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/category/{category}', [HomeController::class, 'category'])->name('category');
 Route::get('/region/{region}', [HomeController::class, 'region'])->name('region');
 Route::get('/news/{id}', [HomeController::class, 'detail'])->name('news.detail');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 // Authentication routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');

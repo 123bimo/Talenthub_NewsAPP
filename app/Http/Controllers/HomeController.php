@@ -47,26 +47,41 @@ class HomeController extends Controller
     {
         $categoryModel = Category::where('name', $category)->firstOrFail();
         $paginatedNews = News::where('category_id', $categoryModel->id)->latest()->paginate(6);
-        
+
         $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
         $categories = Category::all();
         $regions = Region::all();
-    
+
         return view('user.category', compact('category', 'paginatedNews', 'popularNews', 'categories', 'regions'));
     }
-    
+
+
+    // public function region($region)
+    // {
+    //     $regionModel = Region::where('name', $region)->firstOrFail();
+    //     $news = News::where('region_id', $regionModel->id)->latest()->paginate(6);
+
+    //     $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
+    //     $categories = Category::all();
+    //     $regions = Region::all();
+
+    //     return view('user.region', compact('region', 'news', 'popularNews', 'categories', 'regions'));
+    // }
+
 
     public function region($region)
     {
-        $regionModel = Region::where('name', $region)->firstOrFail();
-        $news = News::where('region_id', $regionModel->id)->latest()->paginate(6);
-        
+        $regionModel = Region::whereRaw('LOWER(name) = ?', [strtolower($region)])->firstOrFail();
+        $paginatedNews = News::where('region_id', $regionModel->id)->latest()->paginate(6);
+
         $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
         $categories = Category::all();
         $regions = Region::all();
 
-        return view('user.region', compact('region', 'news', 'popularNews', 'categories', 'regions'));
+        return view('user.region', compact('region', 'paginatedNews', 'popularNews', 'categories', 'regions'));
     }
+
+
 
     public function detail($id)
     {
@@ -77,5 +92,24 @@ class HomeController extends Controller
         $relatedNews = News::where('category_id', $newsItem->category_id)->where('id', '!=', $id)->take(3)->get();
 
         return view('user.detail', compact('newsItem', 'popularNews', 'categories', 'regions', 'relatedNews'));
+    }
+
+    public function search(Request $request)
+    {
+        // dd($request->query());
+        $query = $request['query'];
+
+        // Query untuk mencari berdasarkan nama berita
+        $news = News::where('title','LIKE', '%'.$query.'%')
+        ->get();
+
+        // $categories = News::where('category','LIKE', '%'.$query.'%')
+        // ->get();
+
+        $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
+        $categories = Category::all();
+        $regions = Region::all();
+
+        return view('user.search', compact('news','categories','regions','popularNews'));
     }
 }
