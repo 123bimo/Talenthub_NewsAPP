@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminManageController;
+use App\Http\Controllers\AdminProfileController;
 
 
 // Public routes
@@ -30,5 +32,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('regions', RegionController::class);
     Route::resource('users', UserController::class);
-    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+
+    Route::get('/settings', [AdminProfileController::class, 'settings'])->name('settings');
+    Route::put('/settings', [AdminProfileController::class, 'update'])->name('settings.update');
+
 });
+

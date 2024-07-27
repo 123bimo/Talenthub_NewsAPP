@@ -15,7 +15,7 @@ class HomeController extends Controller
         $news = News::with(['category', 'region'])->latest()->get();
 
         // Get categories by name
-        $featureCategory = Category::where('name', 'edukasi')->first();
+        $featureCategory = Category::where('name', 'feature')->first();
         $komunitasCategory = Category::where('name', 'komunitas')->first();
         $opiniCategory = Category::where('name', 'opini')->first();
 
